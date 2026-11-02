@@ -1,0 +1,108 @@
+UPS CREATOR STUDIO — OFFLINE RELEASE QA REPORT
+
+TEST DATE
+- 02 November 2026 (offline package checks)
+
+SOURCE / PACKAGE
+- Based on the user-confirmed working baseline: upscreatorstudio-main.zip.
+- Education source: GYAN_APEX_NO_PASSWORD_COMPLETE.html.
+- Main website structure retained: index.html, styles.css, app.js, config.js.
+- Single HTML entry point: index.html. GYAN APEX is embedded inside app.js and opened from Education Studio.
+
+AUTOMATED OFFLINE CHECKS
+- 21 checks PASS / 0 FAIL (see QA_TESTS/QA_RESULTS.txt).
+- app.js: Node syntax PASS.
+- config.js: Node syntax PASS.
+- Core module IDs: 1–100, 100 unique IDs.
+- Workflow lock IDs: 1–25, 25 unique IDs.
+- Production engines: 12.
+- Workflow stages: 15.
+- Podcast specialized planning engines: 16.
+- index.html: 69 IDs, no duplicate IDs; local asset references resolve.
+- GYAN APEX embedded source: retained in app.js; isolated iframe execution.
+- CSS braces: 607 open / 607 close.
+- Required release files present.
+- ZIP integrity is checked again after packaging.
+
+EDUCATION CONTENT (as supplied in source)
+- School: 22 categories × 20 topic ideas = 440.
+- College: 13 categories × 20 topic ideas = 260.
+- Total: 35 categories / 700 topic ideas.
+- 12-month calendar is suggested, not an official dated calendar.
+
+NOT TESTED / NOT CERTIFIED
+- Live Supabase Auth, database, RLS, Storage and two-user isolation.
+- Secure server-side Admin authorization and payment approval.
+- Actual GitHub Pages deployment and GitHub Actions run.
+- Gemini/provider generation, actual image/video generation, MP4 rendering.
+- Real audio timestamps and generated lip-sync output.
+- Android Chrome and desktop interactive end-to-end/visual testing. A headless Chromium smoke attempt did not complete reliably in this environment, so it is not reported as PASS.
+- Complete USA 1,000-topic and India 1,000-topic title lists: full original lists were not available in source files; not fabricated.
+
+SECURITY / DATA SAFETY
+- No Supabase database, auth user, or storage object was deleted or reset.
+- No service_role secret is added to the frontend.
+- Do not run SQL against production without a backup and project-owner review.
+- Keep existing GitHub Actions workflow and repository settings.
+
+RESULT
+- Offline static checks PASS.
+- This is a reviewed upload package, NOT 100/100 production certification.
+- Complete live testing requires the project owner to test the deployed site with authorized Supabase access, two separate test accounts, and any required AI/render provider credentials.
+
+
+LATEST UPDATE NOTE:
+- Single HTML entry point is index.html; GYAN APEX source is embedded in app.js.
+- Auto-Pilot question sequence now begins with user purpose and includes category > subcategory > topic.
+- AUTO suggestions use a starter taxonomy and local repeat history; not the full 1,000-topic country banks.
+- Package popup is a client-side UX gate only; secure authorization must be enforced server-side.
+- Re-run QA_TESTS/RUN_TESTS_WINDOWS.bat or python QA_TESTS/run_qa.py after upload.
+
+
+AUTO-PILOT RELEASE QA (latest local run):
+24 offline checks PASS / 0 FAIL.
+Verified: single index.html entry point; embedded GYAN APEX launcher; purpose-first wizard; AUTO/MANUAL selection; searchable Category and Topic; dependent Subcategory; package popup guard; JS syntax; registry counts; HTML IDs; local references; CSS balance; ZIP packaging.
+Not verified: real browser visual interactions, Supabase authorization, package enforcement on server, payments, external AI generation, audio/video rendering and cross-device tests.
+
+
+LATEST DETAILED AUTO-PILOT QA:
+- Manual specific topic required: PASS.
+- Freeform creative direction up to 6,000 characters: PASS.
+- Separate visual, identity, voice, text and brand/CTA steps: PASS.
+- 25 workflow locks run before prompt generation: PASS (defined rule checks only).
+- Per-clip prompts are capped at 900 characters and have copy/download controls: PASS.
+- Sidebar quick search and responsive premium footer: PASS.
+- Clipboard API plus fallback copy path: PASS.
+- Local automated test count: see QA_TESTS/QA_RESULTS.txt.
+- Live Supabase, payment, external AI, actual rendering and browser end-to-end remain NOT TESTED.
+
+
+FINAL AUTO-PILOT REFINEMENT NOTES:
+- MANUAL requires an exact Specific Topic; user-entered values are preserved.
+- Added freeform Creative Direction command text (up to 6,000 characters) plus Visual Style, Identity Rules, Voice Style, Text Rules and Branding/CTA steps.
+- All 25 defined workflow locks are checked against the brief before prompt generation; lock failures stop generation and are highlighted.
+- Production JSON includes the full 100-module manifest, 25 lock results, 12 production engines and 15 workflow stages.
+- Sequence creates one prompt per 10-second segment; each clip prompt has a 900-character maximum, individual Copy/Download and Download All.
+- Sidebar quick search, responsive premium footer, wizard progress bar and clipboard fallback included.
+- Latest offline QA: 34 PASS / 0 FAIL. External live tests remain pending as listed in QA_TESTS/QA_RESULTS.txt.
+
+
+UNIFIED PREMIUM THEME UPDATE:
+- Unified the public website and signed-in workspace around one Midnight Navy + Soft White + Violet + Teal design system.
+- Removed the previous light-workspace/dark-sidebar mismatch by overriding the mixed legacy palette consistently.
+- Standardized page backgrounds, panels, cards, sidebar, topbar, forms, inputs, selects, textareas, buttons, tags, modals, tables, footer and focus states.
+- Improved muted text readability, keyboard focus visibility and reduced-motion support.
+- Contrast calculations for selected base pairs: primary text on page background 18.11:1; primary text on panel 16.22:1; muted text on panel 9.35:1; white on primary button 4.93:1. These are token-level calculations, not a full rendered-page WCAG audit.
+- Latest offline QA: 38 PASS / 0 FAIL. Browser visual inspection remains pending.
+
+
+LATEST STEP-BY-STEP AUTO-PILOT UPDATE (2026-11-02):
+- Manual mode now requires a Specific Topic; AUTO mode can suggest one.
+- Added freeform Creative Direction (up to 6,000 characters) plus Visual Style, Identity/Reference Rules, Voice Style, Screen Text Rules and Branding/CTA steps.
+- Brief carries these instructions into the production prompt and per-clip prompts.
+- Added individual clip prompt textareas, character counters, Copy, Download and Download All Clip Prompts.
+- Each generated clip prompt is capped at 900 characters by the builder.
+- Added live 25-lock audit summary to the brief; prompt generation is blocked if any lock check fails.
+- Added sidebar Quick Search and expanded premium footer links.
+- Latest local QA suite PASS; app.js/config.js syntax PASS; HTML parse PASS; duplicate IDs 0; one HTML entry point (index.html); CSS braces balanced.
+- External Supabase, payment, AI-provider, real browser, mobile/desktop and MP4-render tests remain NOT PERFORMED.
