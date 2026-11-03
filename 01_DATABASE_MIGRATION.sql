@@ -251,3 +251,84 @@ end;
 $$;
 revoke all on function public.ups_activate_paid_subscription(uuid,text,jsonb) from public, anon, authenticated;
 grant execute on function public.ups_activate_paid_subscription(uuid,text,jsonb) to service_role;
+
+
+-- Atomic manual-payment review. The payment and subscription status change
+-- together in one database transaction; an audit row is written in the same transaction.
+create or replace function public.ups_review_manual_payment_atomic(
+  p_transaction_id uuid,
+  p_decision text,
+  p_actor_user_id uuid,
+  p_rejection_reason text default null
+)
+returns table(result_status text, result_expires_at timestamptz)
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_tx public.payment_transactions%rowtype;
+  v_sub public.user_subscriptions%rowtype;
+  v_days integer;
+  v_now timestamptz := now();
+  v_expiry timestamptz;
+begin
+  if p_decision not in ('approve','reject') then
+    raise exception 'Invalid review decision';
+  end if;
+  if p_actor_user_id is null or not exists (
+    select 1 from public.profiles p
+    where p.user_id = p_actor_user_id and p.role = 'super_admin'
+  ) then
+    raise exception 'Super Admin permission required';
+  end if;
+
+  select * into v_tx from public.payment_transactions
+   where id = p_transaction_id and provider = 'manual_upi'
+   for update;
+  if not found or v_tx.status <> 'manual_pending' then
+    raise exception 'Pending manual payment not found';
+  end if;
+  select * into v_sub from public.user_subscriptions
+   where id = v_tx.subscription_id for update;
+  if not found or v_sub.status <> 'manual_pending' then
+    raise exception 'Pending subscription not found';
+  end if;
+
+  if p_decision = 'reject' then
+    update public.payment_transactions
+       set status = 'rejected', reviewed_by = p_actor_user_id,
+           reviewed_at = v_now,
+           rejection_reason = coalesce(nullif(trim(p_rejection_reason),''),'Not verified'),
+           updated_at = v_now
+     where id = v_tx.id;
+    update public.user_subscriptions
+       set status = 'rejected', updated_at = v_now
+     where id = v_sub.id;
+    insert into public.admin_audit_logs(actor_user_id,action,target_table,target_id,details)
+    values (p_actor_user_id,'manual_payment_rejected','payment_transactions',v_tx.id::text,
+            jsonb_build_object('reason',p_rejection_reason,'subscription_id',v_sub.id));
+    return query select 'rejected'::text, null::timestamptz;
+    return;
+  end if;
+
+  select duration_days into v_days from public.subscription_packages
+   where package_code = v_sub.package_code and enabled = true;
+  if v_days is null or v_days <= 0 then raise exception 'Package duration missing or disabled'; end if;
+  v_expiry := v_now + make_interval(days => v_days);
+  update public.payment_transactions
+     set status = 'paid', reviewed_by = p_actor_user_id,
+         reviewed_at = v_now, updated_at = v_now
+   where id = v_tx.id;
+  update public.user_subscriptions
+     set status = 'active', starts_at = v_now, expires_at = v_expiry,
+         activated_by = p_actor_user_id, activated_at = v_now, updated_at = v_now
+   where id = v_sub.id;
+  insert into public.admin_audit_logs(actor_user_id,action,target_table,target_id,details)
+  values (p_actor_user_id,'manual_payment_approved','payment_transactions',v_tx.id::text,
+          jsonb_build_object('subscription_id',v_sub.id,'user_id',v_tx.user_id));
+  return query select 'active'::text, v_expiry;
+end;
+$$;
+revoke all on function public.ups_review_manual_payment_atomic(uuid,text,uuid,text) from public, anon, authenticated;
+grant execute on function public.ups_review_manual_payment_atomic(uuid,text,uuid,text) to service_role;

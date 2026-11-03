@@ -93,17 +93,18 @@ Barcode कोई generic UPI विकल्प नहीं है; provider �
 
 06. अभी क्या अधूरा है — इसे ध्यान से पढ़ें
 -----------------------------------------
-यह ZIP सुरक्षित database/backend foundation है, पूर्ण integrated production release नहीं। निम्न काम बाकी हैं:
-- Existing app.js में pricing cards / package modal integrate करना।
-- Generate gate को नई user_subscriptions table से जोड़ना।
-- Super Admin Dashboard में package editor और pending manual payment review panel जोड़ना।
-- Checkout button में Razorpay Checkout adapter wire करना।
-- UPI QR display/UTR form जोड़ना।
+यह ZIP frontend payment flow और database/backend foundation को integrate करती है, लेकिन पूर्ण production release नहीं है। app.js में package cards, checkout adapter, UPI UTR form, Generate access check और Super Admin payment review UI मौजूद हैं। शेष काम:
+- SQL migration को सही Supabase project पर backup के बाद चलाना।
+- सभी Edge Functions deploy करना और server secrets configure करना।
+- Razorpay TEST MODE order, checkout, signature और webhook का end-to-end परीक्षण।
+- Manual UPI request और atomic Admin approval का live database पर परीक्षण।
+- Login, profile, RLS, Super Admin, normal user और सातों Studios की browser regression testing।
+- Creative Studios के package codes, prices, features और limits Admin से तय करवाना।
 - Creative Studios के अलग package codes, prices, features और limits Admin से तय करवाना।
 - Expiry function को trusted scheduler/cron से नियमित चलाना।
 - End-to-end browser test और Razorpay test-mode webhook test।
 
-जब तक ये integration और tests पूरे न हों, मौजूदा paid access gate को इस नई table पर निर्भर न करें और वास्तविक ग्राहकों से भुगतान न लें।
+जब तक SQL, Edge Functions, secrets, webhook और end-to-end tests पूरे न हों, वास्तविक ग्राहकों से भुगतान न लें।
 
 07. सुरक्षा/rollback
 --------------------
@@ -115,3 +116,8 @@ Barcode कोई generic UPI विकल्प नहीं है; provider �
 08. महत्वपूर्ण
 -------------
 इस ZIP में app.js, index.html, styles.css और config.js के updated versions हैं। इन्हें अपने backup के बाद repository root में replace करें और frontend/payment-client.js को उसी path पर रखें। बाकी पुरानी files (जैसे regional-topic-bank.js और अन्य SQL/docs) को न हटाएँ।
+
+
+FINAL REVIEW NOTE (2026-11-03)
+------------------------------
+Manual UPI approval अब ups_review_manual_payment_atomic() database function के जरिए एक ही transaction में payment, subscription और audit log update करती है। यह function migration के साथ deploy होगी। यह source-level सुधार है; live database पर execute/test होना अभी बाकी है.
