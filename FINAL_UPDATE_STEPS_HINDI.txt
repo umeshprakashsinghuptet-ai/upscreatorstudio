@@ -1,0 +1,31 @@
+UPS CREATOR STUDIO — FINAL UI UPGRADE PACKAGE
+तैयारी: 03-11-2026
+
+इस ZIP में उपलब्ध नवीनतम Premium UI Upgrade प्रोजेक्ट शामिल है।
+ZIP integrity और app.js का Node.js syntax check PASS हुआ है।
+
+GITHUB PAGES पर अपडेट करने के चरण:
+1. GitHub में अपनी repository खोलें।
+2. पुराने project files का backup ZIP डाउनलोड करके सुरक्षित रखें।
+3. Repository की root directory में जाएँ।
+4. इस ZIP को अपने कंप्यूटर पर extract करें।
+5. Extract हुई 'upscreatorstudio-main' directory के अंदर की सभी files और folders
+   repository की root directory में upload करें। केवल outer folder upload न करें।
+6. GitHub यदि overwrite/replace पूछे तो नई files से पुरानी files replace करें।
+7. Commit changes करें और GitHub Pages deployment पूरा होने दें।
+8. वेबसाइट को hard refresh करें (Ctrl+F5) या mobile पर browser cache refresh करें।
+
+महत्वपूर्ण:
+- इस पैकेज में UI/Frontend और prompt-planning सुविधाएँ हैं।
+- AI Generation अभी live Gemini/API generation नहीं है; AI Generation flag OFF है।
+- Payment gateway, server-side subscription entitlement/expiry enforcement और
+  पूर्ण Super Admin backend अभी production-ready/live verified नहीं हैं।
+- Appearance, menu और slider की कुछ settings browser localStorage में सेव होती हैं;
+  वे अभी सभी users के लिए global publish नहीं होतीं।
+- Supabase SQL files को बिना backup और schema/policy review के एक साथ run न करें।
+- Supabase service_role key, SMTP password, Gemini API key या payment secret को
+  GitHub या browser-side config.js में कभी न डालें।
+- Static checks PASS होना live authentication, RLS, email, payment या mobile testing
+  के PASS होने का प्रमाण नहीं है। इनकी अलग से live testing आवश्यक है।
+
+यह ZIP पुराने project का backup लेने के बाद update करने के लिए है।

@@ -1,0 +1,31 @@
+UPS CREATOR STUDIO — INDIA & USA TOPIC BANK UPDATE
+तैयारी: 03-11-2026
+
+इस अपडेट में:
+1. India Topic Bank: 20 विषय-क्षेत्र × 50 = 1,000 topic suggestions.
+2. USA Topic Bank: 20 विषय-क्षेत्र × 50 = 1,000 topic suggestions.
+3. कुल 2,000 topic suggestions.
+4. Region/domain/topic के आधार पर structured topic-detail helper जोड़ा गया है:
+   suggested hook, content angle, 5 regional planning points, fact-check note,
+   suggested formats और custom detail prompt.
+5. Creative Brief Wizard में नया "Topic Details / Key Points" textarea जोड़ा गया।
+   उपयोगकर्ता अपनी पूरी detail, points, उदाहरण, संदर्भ, तारीख, CTA आदि लिख सकता है।
+6. Topic Details Creative Brief summary, generated production prompt और TXT brief
+   में carry forward होती है।
+7. Existing AUTO/MANUAL flow और topic-history selection को बरकरार रखा गया।
+
+QA:
+- app.js Node syntax check: PASS
+- regional-topic-bank.js Node syntax check: PASS
+- Runtime import test: PASS
+- India: 20 domains, 1,000 suggestions; detail helper returns 5 regional points.
+- USA: 20 domains, 1,000 suggestions; detail helper returns 5 regional points.
+- ZIP integrity: PASS
+
+सीमाएँ / ईमानदार नोट:
+- 2,000 entries curated idea prompts हैं; ये real-time trend feed या verified factual database नहीं हैं।
+- Topic-detail helper planning prompts देता है; user अपनी विशिष्ट जानकारी Wizard में लिख सकता है।
+- किसी आँकड़े, सरकारी नीति, कानून, स्वास्थ्य/वित्तीय जानकारी या current event को publish
+  करने से पहले विश्वसनीय स्रोत से सत्यापित करें।
+- Live GitHub Pages browser testing और Supabase/payment/AI provider testing इस offline
+  package audit का हिस्सा नहीं है।

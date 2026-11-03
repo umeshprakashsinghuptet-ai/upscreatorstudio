@@ -1,0 +1,58 @@
+सबसे पहले यह पढ़ें — UPS CREATOR STUDIO
+
+1) ZIP को extract करें। अंदर upscreatorstudio-main नाम का folder मिलेगा।
+2) GitHub repository का पूरा backup पहले लें।
+3) इस folder के अंदर की files repository ROOT में upload करें (extra nested folder में नहीं)।
+4) Existing .github / GitHub Actions workflow, repository settings और secrets को न हटाएँ। इस ZIP में नया workflow शामिल नहीं है।
+5) Supabase database, Auth users, tables या Storage bucket को delete/reset न करें। SQL अपने production project पर बिना backup और review के न चलाएँ।
+6) Main entry point: index.html | GYAN APEX Hub: Education Studio के अंदर Open GYAN APEX Hub बटन
+7) QA_TESTS folder में offline test है:
+   - Windows: QA_TESTS/RUN_TESTS_WINDOWS.bat
+   - Mac/Linux: QA_TESTS/RUN_TESTS_MAC_LINUX.sh
+   Python 3 और Node.js चाहिए। Test कोई network call या database write नहीं करता।
+8) QA_TESTS/QA_RESULTS.txt में इस package के offline checks का परिणाम है: 21 PASS, 0 FAIL.
+9) Live Supabase, Admin security, payment, GitHub deployment, AI generation, MP4 rendering और real mobile/desktop interaction अभी अलग से test होने हैं। इनको PASS या 100% complete न मानें।
+10) USA/India के पूरे 1,000-1,000 original topic titles इस package में उपलब्ध नहीं हैं; source lists मिलने पर ही exact import किया जा सकता है।
+
+Upload करने से पहले QA_REPORT.txt और PROJECT_REQUIREMENTS_MASTER_HINDI.md पढ़ें।
+
+
+LATEST AUTO-PILOT RELEASE:
+- केवल index.html HTML entry point है।
+- Education Hub मुख्य app.js में embedded है; Education Studio में GYAN APEX button से खोलें।
+- Wizard पहले उद्देश्य पूछता है; उसके बाद format, activity, platform, audience, language, category, subcategory, topic, goal, dialogue और production settings.
+- AUTO और MANUAL modes दोनों उपलब्ध हैं।
+- Prompt generation पर package entitlement popup है; secure server-side Supabase enforcement अभी अलग से करना होगा।
+- Full details: AUTOPILOT_FLOW_AND_PACKAGE_RULES_HINDI.md
+
+
+FINAL AUTO-PILOT REFINEMENT NOTES:
+- MANUAL requires an exact Specific Topic; user-entered values are preserved.
+- Added freeform Creative Direction command text (up to 6,000 characters) plus Visual Style, Identity Rules, Voice Style, Text Rules and Branding/CTA steps.
+- All 25 defined workflow locks are checked against the brief before prompt generation; lock failures stop generation and are highlighted.
+- Production JSON includes the full 100-module manifest, 25 lock results, 12 production engines and 15 workflow stages.
+- Sequence creates one prompt per 10-second segment; each clip prompt has a 900-character maximum, individual Copy/Download and Download All.
+- Sidebar quick search, responsive premium footer, wizard progress bar and clipboard fallback included.
+- Latest offline QA: 34 PASS / 0 FAIL. External live tests remain pending as listed in QA_TESTS/QA_RESULTS.txt.
+
+
+UNIFIED PREMIUM THEME UPDATE:
+- Unified the public website and signed-in workspace around one Midnight Navy + Soft White + Violet + Teal design system.
+- Removed the previous light-workspace/dark-sidebar mismatch by overriding the mixed legacy palette consistently.
+- Standardized page backgrounds, panels, cards, sidebar, topbar, forms, inputs, selects, textareas, buttons, tags, modals, tables, footer and focus states.
+- Improved muted text readability, keyboard focus visibility and reduced-motion support.
+- Contrast calculations for selected base pairs: primary text on page background 18.11:1; primary text on panel 16.22:1; muted text on panel 9.35:1; white on primary button 4.93:1. These are token-level calculations, not a full rendered-page WCAG audit.
+- Latest offline QA: 38 PASS / 0 FAIL. Browser visual inspection remains pending.
+
+
+LATEST PRODUCTION FLOW:
+- MANUAL mode में Specific Topic अनिवार्य है।
+- Creative Direction box में पूरा command prompt/text brief (max 6,000 characters) लिखें।
+- आगे Visual Style, Identity/Reference Rules, Voice, Screen Text और Branding/CTA की अलग-अलग जानकारी दें।
+- Final brief में Core Modules और सभी Workflow Locks का audit दिखेगा; कोई lock fail हो तो prompt generation रोकी जाएगी।
+- हर sequence clip का अलग prompt, 900-character counter, Copy, Download और Download All उपलब्ध हैं।
+- Sidebar Quick Search और expanded footer navigation भी जोड़े गए हैं।
+
+
+REGIONAL TOPIC BANK UPDATE (02-11-2026)
+India: 1,000 topic ideas | USA: 1,000 topic ideas. 20 domains per region. AUTO mode and topic search use the selected India/USA audience. Topic ideas must be fact-checked before publishing. See REGIONAL_TOPIC_BANK_GUIDE_HINDI.md.

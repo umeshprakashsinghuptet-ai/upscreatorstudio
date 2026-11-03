@@ -1,0 +1,42 @@
+UPS CREATOR STUDIO — SELF-IMPROVEMENT RELEASE
+Date: 02 November 2026
+
+WHAT WAS IMPROVED LOCALLY
+1. Registration form now collects First Name, Last Name, City, Email and Password.
+2. Signup sends first_name, last_name, full_name and city as Supabase auth user metadata.
+3. Forgot Password uses Supabase resetPasswordForEmail.
+4. Password recovery and signup redirect use the current site origin.
+5. Password autocomplete switches between current-password and new-password.
+6. Auth modal closes using Escape and backdrop click.
+7. Signup-only fields are disabled in Login mode, so hidden required fields do not block login.
+8. Additive SQL setup file included for profiles, auth-user profile trigger and owner-only project RLS.
+9. QA suite expanded to check the new auth controls and setup file.
+
+IMPORTANT LIVE SETUP STILL REQUIRED
+A. Supabase Dashboard > Authentication > URL Configuration:
+   - Site URL must be the deployed GitHub Pages URL.
+   - Add the exact GitHub Pages URL to Redirect URLs.
+   - For password recovery, allow the same redirect URL.
+B. Supabase Authentication > Providers > Email:
+   - Confirm Email setting must match the desired registration flow.
+   - If confirmation is enabled, user must click the email link before login.
+   - Configure SMTP for reliable delivery if using a custom email provider.
+C. Review SUPABASE_AUTH_PROFILE_SETUP_ADDITIVE.sql against the current live schema.
+   Run only after backup and review. It is not automatically executed.
+D. Do not expose the Supabase service_role key in frontend code.
+E. Verify existing tables/policies before running any migration.
+
+NOT CLAIMED / NOT TESTED
+- Live Supabase signup/login/reset
+- Email delivery and confirmation
+- Existing production schema compatibility
+- GitHub Pages browser deployment
+- Admin/Super Admin secure server authorization
+- Payment gateway/webhooks
+- Gemini, image/video generation, voice/lip-sync, MP4 rendering
+
+QA
+- Offline structural QA: 41/41 PASS.
+- JavaScript ES module syntax: PASS.
+- ZIP integrity: to be verified on final archive.
+- Offline QA does not prove live authentication.
