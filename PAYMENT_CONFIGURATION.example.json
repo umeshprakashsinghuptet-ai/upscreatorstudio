@@ -1,0 +1,47 @@
+{
+  "platform": "UPS Creator Studio",
+  "owner_display_name": "Umesh Prakash Singh",
+  "payment_mode": "hybrid",
+  "automatic_gateway": "razorpay",
+  "manual_upi": {
+    "enabled": true,
+    "upi_id": "9971158047-5@ybl",
+    "qr_code_image_url": "./assets/payment/sbi-upi-qr.png",
+    "payment_email": "SET_SUPPORT_EMAIL",
+    "barcode_value": null,
+    "note": "Static UPI QR supplied by user; QR payload decoded and verified as upi://pay?pa=9971158047-5@ybl. User submits UTR; Super Admin must verify actual bank credit before approval.",
+    "owner_display_name": "Umesh Prakash Singh"
+  },
+  "packages": [
+    {
+      "package_code": "learning_daily",
+      "name": "Daily Plan",
+      "price_inr": 50,
+      "duration_days": 1
+    },
+    {
+      "package_code": "learning_single_subject",
+      "name": "One Subject Access",
+      "price_inr": 200,
+      "duration_days": 30,
+      "requires_selected_study": true
+    },
+    {
+      "package_code": "learning_complete_monthly",
+      "name": "Complete Learning Access",
+      "price_inr": 500,
+      "duration_days": 30
+    },
+    {
+      "package_code": "learning_annual",
+      "name": "Annual Learning Plan",
+      "price_inr": 20000,
+      "duration_days": 365
+    }
+  ],
+  "creative_studios": {
+    "separate_catalogue": true,
+    "enabled": false,
+    "note": "Creative Studio prices and entitlements must be defined by Super Admin before activation."
+  }
+}

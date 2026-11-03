@@ -1,0 +1,45 @@
+UPS CREATOR STUDIO — SECOND REVIEW / STATIC QA REPORT
+====================================================
+Review basis:
+- User-supplied source ZIP: upscreatorstudio-main (1).zip
+- Previous Hybrid Payment Upgrade ZIP
+- User-supplied SBI UPI QR screenshot
+
+QR REVIEW:
+- QR image decoded successfully.
+- Decoded UPI URI: upi://pay?pa=9971158047-5@ybl&pn=Umesh%20Prakash%20Singh&mc=0000&mode=02&purpose=00
+- Payee address in QR: 9971158047-5@ybl
+- Payee display name in QR: Umesh Prakash Singh
+- Cropped QR asset re-decoded successfully after creating assets/payment/sbi-upi-qr.png.
+- config.js now enables manual UPI and references ./assets/payment/sbi-upi-qr.png.
+
+STATIC CHECKS:
+- Updated app.js parses as an ES module under Node syntax check.
+- Updated config.js parses as an ES module under Node syntax check.
+- frontend/payment-client.js parses as an ES module under Node syntax check.
+- index.html duplicate-ID scan: no duplicate IDs found.
+- styles.css brace count: balanced.
+- PAYMENT_CONFIGURATION.example.json: valid JSON.
+- Existing app.js import ./regional-topic-bank.js remains; keep original regional-topic-bank.js in repository root.
+- index.html cache-busts styles.css and app.js.
+- ZIP integrity check: passed.
+
+KNOWN GAPS — NOT PRODUCTION READY:
+1. Supabase SQL has NOT been executed against the live project.
+2. Edge Functions have NOT been deployed or Deno type-checked against the live project.
+3. Razorpay TEST MODE order, checkout, signature verification and webhook delivery have NOT been tested.
+4. Manual UPI requires actual bank/UPI statement verification by Super Admin; a submitted UTR or screenshot alone is not proof of credit.
+5. Admin payment review is implemented as a payment modal/shortcut, not a fully designed dedicated Admin Billing page.
+6. Creative Studios catalogue remains disabled placeholder; its individual packages, features, prices and limits are not defined.
+7. Static UPI QR does not encode a dynamic package amount. User must enter the exact displayed amount in their UPI app.
+8. Barcode payment is NOT implemented; the supplied asset is a UPI QR, not a separate barcode rail.
+9. Expiry function requires a trusted scheduler/cron configuration; deployment alone does not schedule it.
+10. Client-side prompt generation gating is not complete server-side enforcement for every export/download/API/private resource route.
+11. Existing login, profile, RLS, Super Admin and normal-user regression tests have NOT been run in a browser against the live project.
+12. Mobile and desktop browser tests have NOT been performed.
+
+SAFETY / DEPLOYMENT:
+- Do not accept live customer payments until SQL, Edge Functions, secrets, webhook, scheduler and end-to-end tests are complete.
+- Do not place Razorpay secrets, Supabase service-role key, UPI PIN or OTP in GitHub or frontend files.
+- Keep the original ZIP and export the live Supabase database before applying migration.
+- This report is a static source review, not 100% production certification.
